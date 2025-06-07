@@ -20,75 +20,75 @@ app.use(express.json())
 
 initializeDatabase()
 
-const projectData = JSON.parse(fs.readFileSync('projectData.json',"utf-8"))
-const tagData = JSON.parse(fs.readFileSync("tagData.json","utf-8"))
-const taskData = JSON.parse(fs.readFileSync("taskData.json","utf-8"))
-const teamData = JSON.parse(fs.readFileSync("teamData.json","utf-8"))
-const userData = JSON.parse(fs.readFileSync('userData.json',"utf-8"))
+// const projectData = JSON.parse(fs.readFileSync('projectData.json',"utf-8"))
+// const tagData = JSON.parse(fs.readFileSync("tagData.json","utf-8"))
+// const taskData = JSON.parse(fs.readFileSync("taskData.json","utf-8"))
+// const teamData = JSON.parse(fs.readFileSync("teamData.json","utf-8"))
+// const userData = JSON.parse(fs.readFileSync('userData.json',"utf-8"))
 
-async function seedData() {
-    try{
-        // projectData Seeding
-for(const project of projectData){
-    const newProject = new Project({
-name: project.name,
-description: project.description,
-    })
-    await newProject.save()
-}
-console.log("Project Data seeded successfully.")
+// async function seedData() {
+//     try{
+//         // projectData Seeding
+// for(const project of projectData){
+//     const newProject = new Project({
+// name: project.name,
+// description: project.description,
+//     })
+//     await newProject.save()
+// }
+// console.log("Project Data seeded successfully.")
 
-// tagData Seeding
-for (const tag of tagData){
-    const newTag = new Tag({
-        name:tag.name,
-    })
-    await newTag.save()
-}
-console.log("Tag Data seeded successfully.")
+// // tagData Seeding
+// for (const tag of tagData){
+//     const newTag = new Tag({
+//         name:tag.name,
+//     })
+//     await newTag.save()
+// }
+// console.log("Tag Data seeded successfully.")
 
-// taskData Seeding
-for (const task of taskData){
-    const newTask = new Task({
-        name:task.name,
-        project:task.project,
-        team:task.team,
-        owners:task.owners,
-        tags:task.tags,
-        timeToComplete:task.timeToComplete,
-        status:task.status,
-    })
-    await newTask.save()
-}
-console.log("Task Data seeded successfully.")
+// // taskData Seeding
+// for (const task of taskData){
+//     const newTask = new Task({
+//         name:task.name,
+//         project:task.project,
+//         team:task.team,
+//         owners:task.owners,
+//         tags:task.tags,
+//         timeToComplete:task.timeToComplete,
+//         status:task.status,
+//     })
+//     await newTask.save()
+// }
+// console.log("Task Data seeded successfully.")
 
-// teamData Seeding
-for(const team of teamData){
-    const newTeam = new Team({
-       name:team.name,
-       description:team.description, 
-    })
-    await newTeam.save()
-}
-console.log("Team Data seeded successfully.")
+// // teamData Seeding
+// for(const team of teamData){
+//     const newTeam = new Team({
+//        name:team.name,
+//        description:team.description, 
+//     })
+//     await newTeam.save()
+// }
+// console.log("Team Data seeded successfully.")
 
-//  userData Seeding 
-for(const user of userData){
-     const hashedPassword = await bcrypt.hash(user.password, 10);
-    const newUser = new User({
-        name:user.name,
-        email:user.email,
-        password: hashedPassword
-    })
-    await newUser.save()
-}
-console.log("User Data seeded successfully.")
+// //  userData Seeding 
+// for(const user of userData){
+//      const hashedPassword = await bcrypt.hash(user.password, 10);
+//     const newUser = new User({
+//         name:user.name,
+//         email:user.email,
+//         password: hashedPassword
+//     })
+//     await newUser.save()
+// }
+// console.log("User Data seeded successfully.")
 
 
-    }catch(error){
-        console.log("An error occred while seeding the data",error)
-    }
-}
+//     }catch(error){
+//         console.log("An error occred while seeding the data",error)
+//     }
+// }
 
 // seedData()
 
