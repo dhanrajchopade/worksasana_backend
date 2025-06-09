@@ -225,6 +225,17 @@ res.status(200).json({error:"Task deleted successfully."})
     }
 })
 
+// Get Project by ID
+
+app.get('/project/:id', verifyJWT, async(req,res)=>{
+  try{
+    const project = await Project.findById(req.params.id)
+    res.json(project)
+  }catch(error){
+    res.status(500).json({error:"Failed to fetch Project details by Id."})
+  }
+})
+
 // Add Team (POST Call API)
 
 app.post("/teams", verifyJWT, async(req,res)=>{
