@@ -225,6 +225,24 @@ res.status(200).json({error:"Task deleted successfully."})
     }
 })
 
+// Get Tasks by ID
+app.get('/tasks/:id', async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id)
+      .populate('project')
+      .populate('team')
+      .populate('owners'); // populating all references
+
+    if (!task) return res.status(404).json({ message: "Task not found" });
+
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch task by ID." });
+  }
+});
+
+
+
 // Get Project by ID
 
 app.get('/project/:id', verifyJWT, async(req,res)=>{
