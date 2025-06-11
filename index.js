@@ -296,8 +296,9 @@ app.post("/projects", verifyJWT, async(req,res)=>{
 app.get("/projects", verifyJWT, async(req,res)=>{
     try{
         const projects = await Project.find()
-        res.json(projects)
+        res.json({projects})
     }catch(error){
+      console.error("Backend error at /projects:", error); 
         res.status(500).json({error:"Failed to get projects details."})
     }
 })
