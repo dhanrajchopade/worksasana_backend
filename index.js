@@ -279,6 +279,15 @@ app.get("/teams", verifyJWT, async(req,res)=>{
     }
 })
 
+app.get('/users',verifyJWT, async (req, res) => {
+  try {
+    const users = await User.find();  
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+
 
 // Add projects (POST Call API)
 app.post("/projects", verifyJWT, async(req,res)=>{
