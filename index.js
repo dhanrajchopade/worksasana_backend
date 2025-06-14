@@ -67,6 +67,7 @@ initializeDatabase()
 //     const newTeam = new Team({
 //        name:team.name,
 //        description:team.description, 
+//    members: team.members 
 //     })
 //     await newTeam.save()
 // }
