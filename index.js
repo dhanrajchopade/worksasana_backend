@@ -270,14 +270,14 @@ app.post("/teams", verifyJWT, async(req,res)=>{
 
 // GET team (Fetch Team Details)
 
-app.get("/teams", verifyJWT, async(req,res)=>{
-    try{
-        const teams = await Team.find()
-        res.json(teams)
-    }catch(error){
-        res.status(500).json({error:"Failed to fetch team details."})
-    }
-})
+app.get("/teams", verifyJWT, async (req, res) => {
+  try {
+    const teams = await Team.find().populate("members");
+    res.json(teams);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch team details." });
+  }
+});
 
 app.get('/users',verifyJWT, async (req, res) => {
   try {
