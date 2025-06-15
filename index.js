@@ -184,11 +184,11 @@ app.post("/tasks", verifyJWT, async(req,res)=>{
 // fetch/filter the Tasks
 app.get('/tasks', verifyJWT, async(req,res)=>{
 try{
-    const {team,owner,tags,project,status} = req.query;
+    const {team,owners,tags,project,status} = req.query;
     const filter = {}
 
     if(team) filter.team = team;
-    if(owner) filter.owners = owner;
+    if(owners) filter.owners = owners;
     if(tags) filter.tags = { $in: tags.split(',') };
     if(project) filter.project = project;
     if(status) filter.status = status;
@@ -390,7 +390,7 @@ app.get('/report/closed-tasks', verifyJWT, async (req, res) => {
         $group: {
           _id: {
             team: "$team",
-            owner: "$owner",
+            owners: "$owners",
             project: "$project"
           },
           closedTasks: { $sum: 1 }
